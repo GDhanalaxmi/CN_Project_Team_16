@@ -1,0 +1,835 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>NetFlow | Network Simulator</title>
+
+    <link rel="stylesheet" href="style.css">
+
+</head>
+
+
+<body>
+
+
+    <!-- HEADER -->
+
+    <header class="navbar">
+
+        <div class="brand">
+
+            <h1>
+                NET<span>FLOW</span>
+            </h1>
+
+            <p>
+                Reliable Transmission & Routing Simulator
+            </p>
+
+        </div>
+
+
+        <div class="system-status">
+
+            <span class="status-dot"></span>
+
+            SYSTEM READY
+
+        </div>
+
+    </header>
+
+
+
+    <!-- MAIN -->
+
+    <main class="container">
+
+
+        <!-- WELCOME -->
+
+        <section class="welcome-card">
+
+            <div class="welcome-content">
+
+                <div class="tag">
+                    COMPUTER NETWORKS SIMULATOR
+                </div>
+
+
+                <h2>
+                    Network Simulation Dashboard
+                </h2>
+
+
+                <p>
+                    Simulate reliable data transmission,
+                    packet loss, congestion and dynamic routing
+                    in a virtual network.
+                </p>
+
+
+                <button id="startBtn">
+                    ▶ Start Simulation
+                </button>
+
+            </div>
+
+        </section>
+
+
+
+        <!-- TRANSMISSION OVERVIEW -->
+
+        <section class="section-title">
+
+            <h2>
+                Transmission Overview
+            </h2>
+
+            <p>
+                Real-time packet transmission statistics
+            </p>
+
+        </section>
+
+
+
+        <section class="stats">
+
+
+            <div class="stat-card">
+
+                <div class="stat-icon">
+                    📦
+                </div>
+
+                <div>
+
+                    <h3>
+                        Packets Sent
+                    </h3>
+
+                    <p id="packetsSent">
+                        0
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="stat-card">
+
+                <div class="stat-icon">
+                    ✓
+                </div>
+
+                <div>
+
+                    <h3>
+                        Delivered
+                    </h3>
+
+                    <p id="packetsDelivered">
+                        0
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="stat-card">
+
+                <div class="stat-icon">
+                    ⚠
+                </div>
+
+                <div>
+
+                    <h3>
+                        Packets Lost
+                    </h3>
+
+                    <p id="packetsLost">
+                        0
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="stat-card">
+
+                <div class="stat-icon">
+                    ↻
+                </div>
+
+                <div>
+
+                    <h3>
+                        Retransmissions
+                    </h3>
+
+                    <p id="retransmissions">
+                        0
+                    </p>
+
+                </div>
+
+            </div>
+
+
+        </section>
+
+
+
+        <!-- ========================= -->
+        <!-- NETWORK TOPOLOGY -->
+        <!-- ========================= -->
+
+
+        <section class="topology-card">
+
+
+            <div class="card-header">
+
+                <div>
+
+                    <h2>
+                        Network Topology
+                    </h2>
+
+                    <p>
+                        Virtual network architecture
+                    </p>
+
+                </div>
+
+
+                <div class="network-status">
+                    ● NETWORK READY
+                </div>
+
+            </div>
+
+
+
+            <div class="topology">
+
+
+                <!-- CONNECTION LINES -->
+
+                <div class="line line-sender-r1"></div>
+
+                <div class="line line-r1-r2"></div>
+
+                <div class="line line-r1-r3"></div>
+
+                <div class="line line-r2-r4"></div>
+
+                <div class="line line-r3-r4"></div>
+
+                <div class="line line-r4-receiver"></div>
+
+
+
+                <!-- SENDER -->
+
+                <div class="node sender"
+                     id="sender">
+
+                    <div class="node-circle">
+                        S
+                    </div>
+
+                    <span>
+                        Sender
+                    </span>
+
+                </div>
+
+
+
+                <!-- R1 -->
+
+                <div class="node router r1"
+                     id="r1">
+
+                    <div class="node-circle">
+                        R1
+                    </div>
+
+                    <span>
+                        Router 1
+                    </span>
+
+                </div>
+
+
+
+                <!-- R2 -->
+
+                <div class="node router r2"
+                     id="r2">
+
+                    <div class="node-circle">
+                        R2
+                    </div>
+
+                    <span>
+                        Router 2
+                    </span>
+
+                </div>
+
+
+
+                <!-- R3 -->
+
+                <div class="node router r3"
+                     id="r3">
+
+                    <div class="node-circle">
+                        R3
+                    </div>
+
+                    <span>
+                        Router 3
+                    </span>
+
+                </div>
+
+
+
+                <!-- R4 -->
+
+                <div class="node router r4"
+                     id="r4">
+
+                    <div class="node-circle">
+                        R4
+                    </div>
+
+                    <span>
+                        Router 4
+                    </span>
+
+                </div>
+
+
+
+                <!-- RECEIVER -->
+
+                <div class="node receiver"
+                     id="receiver">
+
+                    <div class="node-circle">
+                        R
+                    </div>
+
+                    <span>
+                        Receiver
+                    </span>
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- LEGEND -->
+
+
+            <div class="legend">
+
+
+                <div>
+
+                    <span class="legend-dot sender-dot"></span>
+
+                    Sender
+
+                </div>
+
+
+                <div>
+
+                    <span class="legend-dot router-dot"></span>
+
+                    Router
+
+                </div>
+
+
+                <div>
+
+                    <span class="legend-dot receiver-dot"></span>
+
+                    Receiver
+
+                </div>
+
+
+                <div>
+
+                    <span class="legend-line"></span>
+
+                    Network Link
+
+                </div>
+
+
+            </div>
+
+
+        </section>
+
+
+
+        <!-- ================================= -->
+        <!-- PACKET TRANSMISSION -->
+        <!-- ================================= -->
+
+
+        <section class="packet-card">
+
+
+            <div class="card-header">
+
+
+                <div>
+
+                    <h2>
+                        Packet Transmission
+                    </h2>
+
+                    <p>
+                        Reliable packet delivery using Go-Back-N
+                    </p>
+
+                </div>
+
+
+                <div class="packet-status">
+
+                    <span></span>
+
+                    WAITING
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- CURRENT PACKET -->
+
+
+            <div class="current-packet">
+
+
+                <div class="packet-info">
+
+
+                    <span class="packet-label">
+                        CURRENT PACKET
+                    </span>
+
+
+                    <strong id="currentPacket">
+                        —
+                    </strong>
+
+
+                </div>
+
+
+
+                <div class="packet-info">
+
+
+                    <span class="packet-label">
+                        STATUS
+                    </span>
+
+
+                    <strong id="packetStatus">
+                        Waiting
+                    </strong>
+
+
+                </div>
+
+
+
+                <div class="packet-info">
+
+
+                    <span class="packet-label">
+                        WINDOW SIZE
+                    </span>
+
+
+                    <strong>
+                        4
+                    </strong>
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- PROGRESS -->
+
+
+            <div class="progress-section">
+
+
+                <div class="progress-header">
+
+                    <span>
+                        Transmission Progress
+                    </span>
+
+                    <strong id="progressText">
+                        0%
+                    </strong>
+
+                </div>
+
+
+                <div class="progress-bar">
+
+                    <div
+                        class="progress-fill"
+                        id="progressFill">
+                    </div>
+
+                </div>
+
+
+            </div>
+
+
+
+            <!-- PACKET LIST -->
+
+
+            <div class="packet-list"
+                 id="packetList">
+
+
+                <div class="packet-item waiting">
+
+                    <span class="packet-number">
+                        Packet 01
+                    </span>
+
+                    <span class="packet-state">
+                        Waiting
+                    </span>
+
+                </div>
+
+
+                <div class="packet-item waiting">
+
+                    <span class="packet-number">
+                        Packet 02
+                    </span>
+
+                    <span class="packet-state">
+                        Waiting
+                    </span>
+
+                </div>
+
+
+                <div class="packet-item waiting">
+
+                    <span class="packet-number">
+                        Packet 03
+                    </span>
+
+                    <span class="packet-state">
+                        Waiting
+                    </span>
+
+                </div>
+
+
+                <div class="packet-item waiting">
+
+                    <span class="packet-number">
+                        Packet 04
+                    </span>
+
+                    <span class="packet-state">
+                        Waiting
+                    </span>
+
+                </div>
+
+
+                <div class="packet-item waiting">
+
+                    <span class="packet-number">
+                        Packet 05
+                    </span>
+
+                    <span class="packet-state">
+                        Waiting
+                    </span>
+
+                </div>
+
+
+                <div class="packet-item waiting">
+
+                    <span class="packet-number">
+                        Packet 06
+                    </span>
+
+                    <span class="packet-state">
+                        Waiting
+                    </span>
+
+                </div>
+
+
+                <div class="packet-item waiting">
+
+                    <span class="packet-number">
+                        Packet 07
+                    </span>
+
+                    <span class="packet-state">
+                        Waiting
+                    </span>
+
+                </div>
+
+
+                <div class="packet-item waiting">
+
+                    <span class="packet-number">
+                        Packet 08
+                    </span>
+
+                    <span class="packet-state">
+                        Waiting
+                    </span>
+
+                </div>
+
+
+            </div>
+
+
+        </section>
+
+
+
+        <!-- NETWORK STATUS -->
+
+
+        <section class="network-card">
+
+
+            <div class="card-header">
+
+
+                <div>
+
+                    <h2>
+                        Network Status
+                    </h2>
+
+                    <p>
+                        Current state of the virtual network
+                    </p>
+
+                </div>
+
+
+                <div class="live-indicator">
+
+                    <span></span>
+
+                    LIVE
+
+                </div>
+
+
+            </div>
+
+
+
+            <div class="status-grid">
+
+
+                <div class="status-box">
+
+                    <div class="status-label">
+                        CURRENT ROUTE
+                    </div>
+
+                    <div
+                        class="status-value route"
+                        id="currentRoute">
+
+                        Not Started
+
+                    </div>
+
+                </div>
+
+
+
+                <div class="status-box">
+
+                    <div class="status-label">
+                        NETWORK DELAY
+                    </div>
+
+                    <div
+                        class="status-value"
+                        id="delay">
+
+                        0 ms
+
+                    </div>
+
+                </div>
+
+
+
+                <div class="status-box">
+
+                    <div class="status-label">
+                        CONGESTION
+                    </div>
+
+                    <div
+                        class="status-value congestion"
+                        id="congestion">
+
+                        LOW
+
+                    </div>
+
+                </div>
+
+
+
+                <div class="status-box">
+
+                    <div class="status-label">
+                        TRANSMISSION PROTOCOL
+                    </div>
+
+                    <div class="status-value">
+
+                        Go-Back-N
+
+                    </div>
+
+                </div>
+
+
+            </div>
+
+
+        </section>
+
+
+
+        <!-- ACTIVITY -->
+
+
+        <section class="activity-card">
+
+
+            <div class="card-header">
+
+                <div>
+
+                    <h2>
+                        System Activity
+                    </h2>
+
+                    <p>
+                        Latest simulation event
+                    </p>
+
+                </div>
+
+            </div>
+
+
+
+            <div class="activity">
+
+
+                <div class="activity-dot"></div>
+
+
+                <div>
+
+                    <strong id="activityTitle">
+                        Waiting for simulation
+                    </strong>
+
+
+                    <p id="activityText">
+
+                        Click "Start Simulation"
+                        to begin network transmission.
+
+                    </p>
+
+                </div>
+
+
+            </div>
+
+
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+
+    <footer>
+
+        <p>
+
+            NETFLOW
+
+            <span>•</span>
+
+            Computer Networks Simulation Project
+
+        </p>
+
+    </footer>
+
+    <script src="app.js"></script>
+
+</body>
+
+</html>
